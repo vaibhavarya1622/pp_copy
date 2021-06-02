@@ -65,7 +65,7 @@ const IndexMap =(props)=> {
       
      const pcoords1=decodePolyline(patientPolyline)
      new window.google.maps.Marker({
-      position:pcoords1[0],
+      position:pcoords1[pcoords1.length-1],
       icon:{
         url:patientMarker,
         scaledSize:new window.google.maps.Size(64,64)
@@ -79,10 +79,13 @@ const IndexMap =(props)=> {
         scaledSize:new window.google.maps.Size(50,50)
       }
     })
-    var i=pcoords1.length-1;
+    var len=pcoords1.length-1;
+    var i=0;
+    var bounds=new window.google.maps.LatLngBounds()
+
 var interval = window.setInterval(function(){
-    i -= 1;
-    if(i === 0){
+    i += 1;
+    if(i === len){
         clearInterval(interval);
     }
     driverMarker.setPosition(pcoords1[i])
@@ -90,7 +93,7 @@ var interval = window.setInterval(function(){
 }, 1000); 
 
     new window.google.maps.Marker({
-      position:pcoords1[pcoords1.length-1],
+      position:pcoords1[0],
       map,
       icon:{
         url:hospitalMarker,
@@ -105,7 +108,6 @@ var interval = window.setInterval(function(){
         strokeWeight: 3,
      })
      polyline1.setMap(map)
-     var bounds=new window.google.maps.LatLngBounds()
      bounds.extend({lat: 16.74674, lng: 81.69071})
     bounds.extend({lat: 16.72822, lng: 81.69714})
      map.fitBounds(bounds)
