@@ -79,11 +79,7 @@ const IndexMap =(props)=> {
     })
     new window.google.maps.Marker({
       position:pcoords1[pcoords1.length-1],
-      map,
-      icon:{
-        url:hospitalmarkersvg,
-        scaledSize:new window.google.maps.Size(40,40)
-      }
+      map
     })
      let polyline1=new window.google.maps.Polyline({
        path:pcoords1,
