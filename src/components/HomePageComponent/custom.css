@@ -1,0 +1,62 @@
+  .indexMap {
+    position: relative;
+    width: 1580px;
+    height: 560px;
+    top: -60px;
+  }
+  
+  @media screen and (max-width: 1300px) {
+    .indexMap {
+      width: 1290px;
+      height: 516px;
+    }
+  }
+  @media screen and (max-width: 1200px) {
+    .indexMap {
+      width: 1190px;
+      height: 476px;
+    }
+  }
+  @media screen and (max-width: 960px) {
+    .indexMap {
+      width: 950px;
+      height: 380px;
+    }
+  }
+  @media screen and (max-width: 640px) {
+    .indexMap {
+      width: 630px;
+      height: 380px;
+    }
+  }
+.SearchBar{
+  margin-top: 10px;
+ display: flex;
+ margin-bottom: 20px;
+ justify-content: space-between;
+}
+.input{
+margin-left: 10px;
+border-radius: 10px;
+}
+.button{
+margin-right: 15px;
+}
+.myLocationBtn:hover{
+  background-color: gray;
+  color:white;
+}
+.myLocationBtn{
+  border-radius: 10px;
+}
+.searchHospital{
+  border: none;
+  width: 200px;
+  margin-left: 1rem;
+}
+.searchHospital:focus{
+  outline: none;
+}
+.myLocationBtn:focus{
+  outline: none;
+}
