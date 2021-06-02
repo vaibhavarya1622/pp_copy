@@ -9,12 +9,13 @@ import {
 } from '../../redux/Hospital/hospitalActions'
 import hospitalmarkersvg from "./../../images/assets/hospitalmarkersvg.svg"
 import HospitalList from './../HospitalList/HospitalList'
-import usermarkersvg from "./../../images/assets/user.svg"
+import usermarkersvg from "./../../images/patient.png"
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import SearchIcon from '@material-ui/icons/Search';
 import './custom.css'
 import axios from 'axios'
 import hospitals from './../HospitalList/FakeHospitalList'
+import hospital from './../../images/hospital.png'
 
 var service, map, infoWindow, markers;
 const HomePageSideMap = () => {
@@ -41,11 +42,25 @@ const HomePageSideMap = () => {
       var marker = new window.google.maps.Marker({
         map: map,
         title: place.name,
+        icon:{
+          url:hospital,
+          scaledSize:new window.google.maps.Size(64,64)
+        },
         position: {lat:place.coords[0],lng:place.coords[1]}
       });
       bounds.extend({lat:place.coords[0],lng:place.coords[1]});
     }
     map.fitBounds(bounds);
+  }
+  const getDistance = (destination) => {
+    let origin = [25.27794, 83.00244]
+    var R = 3958.8; // Radius of the Earth in miles
+    var rlat1 = destination[0] * (Math.PI / 180); // Convert degrees to radians
+    var rlat2 = origin[0] * (Math.PI / 180); // Convert degrees to radians
+    var difflat = rlat2 - rlat1; // Radian difference (latitudes)
+    var difflon = (destination[1] - origin[1]) * (Math.PI / 180); // Radian difference (longitudes)
+    var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
+    return Math.round(d);
   }
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
@@ -62,8 +77,31 @@ const HomePageSideMap = () => {
     markers = new window.google.maps.Marker({
       map,
       draggable: true,
-      icon: usermarkersvg,
+      icon:{
+        url:usermarkersvg,
+        scaledSize:new window.google.maps.Size(64,64)
+      },
       position: { lat: 25.27794, lng: 83.00244 }
+    })
+    map.panTo({ lat: 25.27794, lng: 83.00244 })
+
+    axios.get('https://server.prioritypulse.co.in/users/hospitals')
+    .then(response=>{
+      const data=response.data
+      var hospitalList=data.map(hospital=>{
+        return {
+          coordinates:hospital['hospitalLocation'].coordinates,
+          name:hospital['name'],
+          city:hospital['city'],
+          district:hospital['district'],
+          state:hospital['state'],
+          numbers:hospital['hospitalNumbers'],
+          distance:getDistance(hospital['hospitalLocation'].coordinates)
+        }
+      })
+      hospitalList.sort((a,b)=>a.distance-b.distance)
+      // console.log(hospitalList)
+      dispatch(fetchHospitalDetailsSuccess(hospitalList))
     })
     createMarkers(hospitals)
 

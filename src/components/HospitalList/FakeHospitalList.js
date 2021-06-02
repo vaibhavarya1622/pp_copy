@@ -11,24 +11,24 @@ const hospitals=[
         name:"Sir SunderLal Hospital",
         city:"Banaras",
         district:"Banaras",
-        mobile:"9402930422",
+        mobile:"9043243452",
         coords:[25.27658919429289, 82.99963237356269],
-        distance:"3.4Km"
+        distance:"2.6Km"
     },
     {
         name:"Gyan Hospital",
         city:"Banaras",
         district:"Banaras",
-        mobile:"9402930422",
+        mobile:"9492538522",
         coords:[25.27308551257164, 82.96728954590283],
-        distance:"2.7Km"
+        distance:"3.7Km"
     }
     ,
     {
         name:"Arogya Hospital",
         city:"Banaras",
         district:"Banaras",
-        mobile:"9402930422",
+        mobile:"9992930412",
         coords:[25.25888291540422, 82.96149842252024],
         distance:"6.5Km"
     }

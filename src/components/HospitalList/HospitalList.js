@@ -6,30 +6,44 @@ import './HospitalList.styles.css';
 import PhoneIcon from '@material-ui/icons/Phone';
 import hospitals from './FakeHospitalList'
 
+let polyline;
 const HospitalList = (props) => {
   const [dropdownOpen, setOpen] = useState(false);
 
   const toggle = () => setOpen(!dropdownOpen);
 
   const setHospitalCenter = (place) => {
-    var content = '<div id="iw-container">' +
-      '<div class="iw-title">' + place.name + '</div>' +
-      '<div class="iw-content">' +
-      '<div class="iw-subTitle">near</div>' +
-      '<p >'+place.distance+' KM  away '+
-    '</div>' +
-  '</div>';
-  var bounds=new window.google.maps.LatLngBounds()
-  var pos=new window.google.maps.LatLng(place.coords[0],place.coords[1])
-  if(props.map){
-    props.map.setZoom(14)
-  props.map.panTo({lat:place.coords[0],lng:place.coords[1]})
-  props.infoWindow.setPosition({lat:place.coords[0],lng:place.coords[1]})
-  props.infoWindow.setContent(content)
-  props.infoWindow.open(props.map)
-  }
-  bounds.extend(pos)
+  //   var content = '<div id="iw-container">' +
+  //     '<div class="iw-title">' + place.name + '</div>' +
+  //     '<div class="iw-content">' +
+  //     '<div class="iw-subTitle">near</div>' +
+  //     '<p >'+place.distance+' KM  away '+
+  //   '</div>' +
+  // '</div>';
+  // var bounds=new window.google.maps.LatLngBounds()
+  // var pos=new window.google.maps.LatLng(place.coords[0],place.coords[1])
+  // props.map.setZoom(14)
+  // props.map.panTo({lat:place.coords[0],lng:place.coords[1]})
+  // props.infoWindow.setPosition({lat:place.coords[0],lng:place.coords[1]})
+  // props.infoWindow.setContent(content)
+  // props.infoWindow.open(props.map)
+  // bounds.extend(pos)
   // props.map.fitBounds(bounds)
+  if(props.map){
+    if(polyline!==undefined){
+      polyline.setMap(null)
+    }
+
+    var pcoords1=[{ lat: 25.27794, lng: 83.00244 },{lat:place.coords[0],lng:place.coords[1]}]
+    polyline=new window.google.maps.Polyline({
+      path:pcoords1,
+      geodesic: true,
+       strokeColor: "#0000FF",
+       strokeOpacity: 1.0,
+       strokeWeight: 3,
+    })
+  polyline.setMap(props.map)
+  }
   }
   const [hospital, setHospital] = useState({ name: '', city: '', district: '', mobile: '' });
   return (

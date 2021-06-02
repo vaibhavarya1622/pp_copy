@@ -8,11 +8,11 @@ import {
 import { useSelector} from "react-redux";
 import { useState } from "react";
 import ambulancesvg from './../../images/assets/ambulancessvg.svg'
-import usermarkersvg from "./../../images/assets/user.svg"
-import hospitalmarkersvg from "./../../images/assets/hospitalmarkersvg.svg"
+import patientMarker from "./../../images/patient.png"
+import hospitalMarker from "./../../images/hospital.png"
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import io from 'socket.io-client'
-import drivericon from './../../images/drivericon.png'
+import drivericon from './../../images/driving.png'
 import decodePolyline from "decode-google-map-polyline";
 
 let infoWindow,usermarker,driverWindow,drivermarker,marker;
@@ -61,12 +61,15 @@ const IndexMap =(props)=> {
         mapTypeControl: false,
         streetViewControl:false,
         fullscreenControl:false,
-        icon:usermarkersvg
       });
       
      const pcoords1=decodePolyline(patientPolyline)
      new window.google.maps.Marker({
       position:pcoords1[0],
+      icon:{
+        url:patientMarker,
+        scaledSize:new window.google.maps.Size(64,64)
+      },
       map
     })
     new window.google.maps.Marker({
@@ -79,7 +82,11 @@ const IndexMap =(props)=> {
     })
     new window.google.maps.Marker({
       position:pcoords1[pcoords1.length-1],
-      map
+      map,
+      icon:{
+        url:hospitalMarker,
+        scaledSize:new window.google.maps.Size(64,64)
+      }
     })
      let polyline1=new window.google.maps.Polyline({
        path:pcoords1,
