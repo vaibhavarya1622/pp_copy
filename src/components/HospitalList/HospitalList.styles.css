@@ -82,3 +82,9 @@
 hr {
     margin: 0.1em auto;
 }
+.shadow {
+	box-shadow: 0 8px 6px -6px black;
+	background-color: rgb(202, 199, 199);
+	color: #C504B6;
+	border-radius: 5px;
+  }
