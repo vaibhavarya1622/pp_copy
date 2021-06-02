@@ -175,12 +175,6 @@ export default function ResponsiveDrawer(props) {
             <ListItemText  primary={userDetails['hospital']?userDetails.hospital['city']:'Not Available'} />
           </ListItem>
           <ListItem button className={classes.nested}>
-            <ListItemText  primary={userDetails['district']?userDetails.hospital['district']:'Not Available'}/>
-          </ListItem>
-          <ListItem button className={classes.nested}>
-            <ListItemText primary={userDetails['email']?userDetails.hospital['email']:'Not Available'} />
-          </ListItem>
-          <ListItem button className={classes.nested}>
             <ListItemText primary={userDetails['hospital']?userDetails.hospital['hospitalNumbers'][0]:'Not Available'} />
           </ListItem>
         </List>

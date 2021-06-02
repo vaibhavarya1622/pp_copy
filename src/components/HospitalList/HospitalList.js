@@ -5,6 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './HospitalList.styles.css';
 import PhoneIcon from '@material-ui/icons/Phone';
 import hospitals from './FakeHospitalList'
+import decodePolyline from "decode-google-map-polyline";
 
 let polyline;
 const HospitalList = (props) => {
@@ -34,13 +35,16 @@ const HospitalList = (props) => {
       polyline.setMap(null)
     }
 
-    var pcoords1=[{ lat: 25.27794, lng: 83.00244 },{lat:place.coords[0],lng:place.coords[1]}]
+    // var pcoords1=[{ lat: 25.27794, lng: 83.00244 },{lat:place.coords[0],lng:place.coords[1]}]
+    var pcoords1=decodePolyline("czeeB}erqNGGe@g@OMa@a@a@_@y@o@IEg@]y@c@OEUGAAu@w@KDi@VGFGDY\[d@e@r@ALU|AQv@M^CDEBC@E?C?C?CASGa@SeAe@SMUOc@Y[SKEo@[y@]iAm@o@a@i@W?DEPAJCHANEN?@OAi@Gi@G_@KC?KCGCIAIGECOI_@OGCEAEAE?E?K@iBGg@Bs@?aA?c@A[Aa@Ci@IOA}@GSAoFIy@Ac@GuAe@uB|FKZoApDaBlEg@zAe@lAe@tA_BpEqAzDy@~Bi@zAi@zAiAfDUn@iAfDKVGPiAdDIRGRk@`Bk@fBENCNERERCREVCTCRAPAT?R?T?T@V@P?@@NBXBVBTBRDTFVFTHRFTHTTb@FNJPx@rAf@r@`ApAdAtAhChDLRNTLPFHDFv@rALRDJP^L^Rj@Lj@BPDNFh@D^BPBND\Hj@NtALdANtA`@~CHj@Fb@NlAjAhIFd@F|@Br@?VAN?B?H?f@AXARCVCTV^X@")
+    console.log(pcoords1[0])
+    console.log(pcoords1[pcoords1.length-1])
     polyline=new window.google.maps.Polyline({
       path:pcoords1,
       geodesic: true,
        strokeColor: "#0000FF",
        strokeOpacity: 1.0,
-       strokeWeight: 3,
+       strokeWeight: 5,
     })
   polyline.setMap(props.map)
   }

@@ -22,7 +22,7 @@ let polylinePath
 
 const IndexMap =(props)=> {
 
-  const patientPolyline="}|dyCwjnyN[?gACiCK?aBGwBCcACoAAw@AuAIe@CwAEwAMqEy@?{ACyAAi@AeBIyAK{AQeC_@eBYAAk@My@UcBe@AAq@SaA_@o@YwCaBqBkAOIyB_Bi@e@MMWWaBeBwC}CYY]i@cA}A{@aBKS{A_DAEU_@o@oBUu@Ma@K_@AGCKm@gCa@kBMQWmAOiAEg@I_AKaB?MIeC?IGaBAkA@Y@oA@WHkA@SBk@?M?K?IAKMGmBaAcAi@q@@YQ@UaCwAA??@A?A?A??@A?A?AAA?A?AAA??AA??AA?ACAC?E?E?A?A@??A@A?A@??A@??A@?@A@?@?@AX{Ad@}BLuALiABm@DgA?KBqBJ?fALVCT_BF["
+  const patientPolyline="czeeB}erqNGGe@g@OMa@a@a@_@y@o@IEg@]y@c@OEUGAAu@w@KDi@VGFGDY\[d@e@r@ALU|AQv@M^CDEBC@E?C?C?CASGa@SeAe@SMUOc@Y[SKEo@[y@]iAm@o@a@i@W?DEPAJCHANEN?@OAi@Gi@G_@KC?KCGCIAIGECOI_@OGCEAEAE?E?K@iBGg@Bs@?aA?c@A[Aa@Ci@IOA}@GSAoFIy@Ac@GuAe@uB|FKZoApDaBlEg@zAe@lAe@tA_BpEqAzDy@~Bi@zAi@zAiAfDUn@iAfDKVGPiAdDIRGRk@`Bk@fBENCNERERCREVCTCRAPAT?R?T?T@V@P?@@NBXBVBTBRDTFVFTHRFTHTTb@FNJPx@rAf@r@`ApAdAtAhChDLRNTLPFHDFv@rALRDJP^L^Rj@Lj@BPDNFh@D^BPBND\Hj@NtALdANtA`@~CHj@Fb@NlAjAhIFd@F|@Br@?VAN?B?H?f@AXARCVCTV^X@"
   
 
 
@@ -56,7 +56,7 @@ const IndexMap =(props)=> {
   // },[patientPolyline])
  const initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
-        center: {lat: 25.26175, lng: 82.98172},
+        center: {lat: 16.74674, lng: 81.69071},
         zoom: 15,
         mapTypeControl: false,
         streetViewControl:false,
@@ -72,14 +72,23 @@ const IndexMap =(props)=> {
       },
       map
     })
-    new window.google.maps.Marker({
-      position:pcoords1[10],
+    var driverMarker=new window.google.maps.Marker({
       map,
       icon:{
         url:drivericon,
         scaledSize:new window.google.maps.Size(50,50)
       }
     })
+    var i=pcoords1.length-1;
+var interval = window.setInterval(function(){
+    i -= 1;
+    if(i === 0){
+        clearInterval(interval);
+    }
+    driverMarker.setPosition(pcoords1[i])
+    map.panTo(pcoords1[i])
+}, 1000); 
+
     new window.google.maps.Marker({
       position:pcoords1[pcoords1.length-1],
       map,
@@ -96,6 +105,10 @@ const IndexMap =(props)=> {
         strokeWeight: 3,
      })
      polyline1.setMap(map)
+     var bounds=new window.google.maps.LatLngBounds()
+     bounds.extend({lat: 16.74674, lng: 81.69071})
+    bounds.extend({lat: 16.72822, lng: 81.69714})
+     map.fitBounds(bounds)
   };
   const renderMap = () => {
     loadScript(

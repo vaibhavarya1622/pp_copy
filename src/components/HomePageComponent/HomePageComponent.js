@@ -34,24 +34,8 @@ const HomePageSideMap = () => {
   const hospitalDetails = useSelector(
     (state) => state.Hospital.hospitalDetails
   );
-  const listOfCoordinates = hospitalDetails.map(detail => detail.coordinates)
-
-  const createMarkers = (places) => {
-    var bounds = new window.google.maps.LatLngBounds();
-    for (var i = 0, place; place = places[i]; i++) {
-      var marker = new window.google.maps.Marker({
-        map: map,
-        title: place.name,
-        icon:{
-          url:hospital,
-          scaledSize:new window.google.maps.Size(64,64)
-        },
-        position: {lat:place.coords[0],lng:place.coords[1]}
-      });
-      bounds.extend({lat:place.coords[0],lng:place.coords[1]});
-    }
-    map.fitBounds(bounds);
-  }
+ 
+  
   const getDistance = (destination) => {
     let origin = [25.27794, 83.00244]
     var R = 3958.8; // Radius of the Earth in miles
@@ -64,7 +48,7 @@ const HomePageSideMap = () => {
   }
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
-      center: { lat: 25.27794, lng: 83.00244 },
+      center: {lat: 16.74674, lng: 81.69071},
       zoom: 15,
       mapTypeControl: false,
       zoomControlOptions: {
@@ -74,17 +58,28 @@ const HomePageSideMap = () => {
     
     infoWindow = new window.google.maps.InfoWindow();
 
-    markers = new window.google.maps.Marker({
+    new window.google.maps.Marker({
       map,
-      draggable: true,
       icon:{
         url:usermarkersvg,
         scaledSize:new window.google.maps.Size(64,64)
       },
-      position: { lat: 25.27794, lng: 83.00244 }
+      position: {lat: 16.74674, lng: 81.69071}
     })
-    map.panTo({ lat: 25.27794, lng: 83.00244 })
-
+    map.setCenter({lat: 16.74674, lng: 81.69071})
+    
+    new window.google.maps.Marker({
+      map: map,
+      icon:{
+        url:hospital,
+        scaledSize:new window.google.maps.Size(64,64)
+      },
+      position: {lat: 16.72822, lng: 81.69714}
+    });
+    var bounds = new window.google.maps.LatLngBounds();
+    bounds.extend({lat: 16.74674, lng: 81.69071})
+    bounds.extend({lat: 16.72822, lng: 81.69714})
+    map.fitBounds(bounds)
     axios.get('https://server.prioritypulse.co.in/users/hospitals')
     .then(response=>{
       const data=response.data
@@ -103,7 +98,6 @@ const HomePageSideMap = () => {
       // console.log(hospitalList)
       dispatch(fetchHospitalDetailsSuccess(hospitalList))
     })
-    createMarkers(hospitals)
 
     //maps
 
