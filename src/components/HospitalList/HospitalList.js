@@ -21,11 +21,13 @@ const HospitalList = (props) => {
   '</div>';
   var bounds=new window.google.maps.LatLngBounds()
   var pos=new window.google.maps.LatLng(place.coords[0],place.coords[1])
-  props.map.setZoom(14)
+  if(props.map){
+    props.map.setZoom(14)
   props.map.panTo({lat:place.coords[0],lng:place.coords[1]})
   props.infoWindow.setPosition({lat:place.coords[0],lng:place.coords[1]})
   props.infoWindow.setContent(content)
   props.infoWindow.open(props.map)
+  }
   bounds.extend(pos)
   // props.map.fitBounds(bounds)
   }
