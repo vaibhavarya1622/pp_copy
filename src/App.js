@@ -15,7 +15,7 @@ function App() {
       <Router>
       <Route path='/token' component={Token} />
       <Route path='/track' component={Track} />
-      <Route path='/home' component={Home} />
+      <Route path='/' component={Home} />
       <Route path='pastride' component={Pastride} />
       <Route path='/login' component={Login} />
       <Route path='/profile' component={Profile} />
