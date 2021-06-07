@@ -41,7 +41,7 @@ function Header({ location }) {
           <ClearIcon style={{ fontSize: "30px", color: "white" }} />
         )}
       </div>
-      <nav className={classna}>
+      <nav className={classna} style={{paddingRight: "20px"}}>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/token">TrackAmbulance</NavLink>
         <NavLink to="#">PastRide</NavLink>
@@ -62,6 +62,7 @@ function Header({ location }) {
         {location === "login" && (
           <div className="animation start-collaborate" />
         )}
+        
       </nav>
       <div className="clearfix"></div>
     </div>

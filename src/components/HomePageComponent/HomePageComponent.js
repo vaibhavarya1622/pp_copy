@@ -191,9 +191,9 @@ const HomePageSideMap = () => {
     <main>
       <div className="SearchBar">
         <div className="input">
-          <SearchIcon style={{ color: "#390999", marginLeft: "1rem" }} />
+          <SearchIcon style={{ color: "#390999", marginLeft: "0.3rem"}} />
           <input
-            placeholder="Search nearby hospitals..."
+            placeholder="Search nearby hospitals.."
             className="searchHospital"
             id="mapsearch"
           />
@@ -201,7 +201,7 @@ const HomePageSideMap = () => {
 
         <div className="button">
           <button onClick={(e) => myLocation()} className="myLocationBtn">
-            <LocationOnIcon style={{ color: "#960A0A" }} /> My Location
+            <LocationOnIcon style={{ color: "#960A0A"}} /> My Location
           </button>
 
         </div>

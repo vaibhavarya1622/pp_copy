@@ -32,12 +32,13 @@
 .SearchBar{
   margin-top: 10px;
  display: flex;
- margin-bottom: 20px;
+ margin-bottom: 10px;
  justify-content: space-between;
 }
 .input{
 margin-left: 10px;
 border-radius: 10px;
+display: flex;
 }
 .button{
 margin-right: 15px;
@@ -52,11 +53,26 @@ margin-right: 15px;
 .searchHospital{
   border: none;
   width: 200px;
-  margin-left: 1rem;
+  margin-left: 0.3rem;
 }
 .searchHospital:focus{
   outline: none;
 }
 .myLocationBtn:focus{
   outline: none;
+}
+@media screen and (max-width: 330px) {
+  .input{
+    max-width: 210px;
+    margin-left: 0;
+    display: flex;
+  }
+  .input::placeholder {
+    font-size: 13px;
+  }
+  .button{
+    max-width: 130px;
+    font-size: 10px;
+    margin-right: 5px;
+  }
 }
