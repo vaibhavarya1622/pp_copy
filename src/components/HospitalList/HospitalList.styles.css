@@ -91,6 +91,7 @@ hr {
 .cardCross{
 	margin-left: 1000px;
 	color: "FF024E" ;
+	cursor: pointer;
 }
 
 @media screen and (max-width: 550px) {
@@ -114,5 +115,6 @@ hr {
 	.cardCross{
 		margin-left: 100px;
 		color: "FF024E" ;
+		cursor: pointer;
 	}
   }

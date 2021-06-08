@@ -27,6 +27,17 @@ const HospitalList = (props) => {
 
   const toggle = () => setOpen(!dropdownOpen);
 
+  const getDistance = (destination) => {
+    let origin = [25.27794, 83.00244]
+    var R = 3958.8; // Radius of the Earth in miles
+    var rlat1 = destination[0] * (Math.PI / 180); // Convert degrees to radians
+    var rlat2 = origin[0] * (Math.PI / 180); // Convert degrees to radians
+    var difflat = rlat2 - rlat1; // Radian difference (latitudes)
+    var difflon = (destination[1] - origin[1]) * (Math.PI / 180); // Radian difference (longitudes)
+    var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
+    return Math.round(d);
+  }
+
   const setHospitalCenter = (place) => {
     //   var content = '<div id="iw-container">' +
     //     '<div class="iw-title">' + place.name + '</div>' +
@@ -51,8 +62,8 @@ const HospitalList = (props) => {
 
       // var pcoords1=[{ lat: 25.27794, lng: 83.00244 },{lat:place.coords[0],lng:place.coords[1]}]
       var pcoords1 = decodePolyline("czeeB}erqNGGe@g@OMa@a@a@_@y@o@IEg@]y@c@OEUGAAu@w@KDi@VGFGDY\[d@e@r@ALU|AQv@M^CDEBC@E?C?C?CASGa@SeAe@SMUOc@Y[SKEo@[y@]iAm@o@a@i@W?DEPAJCHANEN?@OAi@Gi@G_@KC?KCGCIAIGECOI_@OGCEAEAE?E?K@iBGg@Bs@?aA?c@A[Aa@Ci@IOA}@GSAoFIy@Ac@GuAe@uB|FKZoApDaBlEg@zAe@lAe@tA_BpEqAzDy@~Bi@zAi@zAiAfDUn@iAfDKVGPiAdDIRGRk@`Bk@fBENCNERERCREVCTCRAPAT?R?T?T@V@P?@@NBXBVBTBRDTFVFTHRFTHTTb@FNJPx@rAf@r@`ApAdAtAhChDLRNTLPFHDFv@rALRDJP^L^Rj@Lj@BPDNFh@D^BPBND\Hj@NtALdANtA`@~CHj@Fb@NlAjAhIFd@F|@Br@?VAN?B?H?f@AXARCVCTV^X@")
-      console.log(pcoords1[0])
-      console.log(pcoords1[pcoords1.length - 1])
+      // console.log(pcoords1[0])
+      // console.log(pcoords1[pcoords1.length - 1])
       polyline = new window.google.maps.Polyline({
         path: pcoords1,
         geodesic: true,
@@ -63,7 +74,7 @@ const HospitalList = (props) => {
       polyline.setMap(props.map)
     }
   }
-  const [hospital, setHospital] = useState({ name: '', city: '', district: '', mobile: '' });
+  const [hospital, setHospital] = useState({ name: '', city: '', district: '', mobile: '',distance:'' });
   return (
     <div>
       <ButtonDropdown direction="right" isOpen={dropdownOpen} toggle={toggle} style={{ zIndex: 10 }}>
@@ -82,13 +93,12 @@ const HospitalList = (props) => {
               return (
                 <div>
                   <div key={id}>
-                    {/* <DropdownItem onClick={() => setHospital({ name: val.name,rating:val.rating, description: val.description})}><h5>{val.name}</h5></DropdownItem> */}
                     <DropdownItem onClick={() => {
                       setHospitalCenter(val)
                       setCardOpen(true)
-                      setHospital({ name: val.name, city: val.city, district: val.district, mobile: val.mobile })
+                      setHospital({ name: val.name, city: val.city, district: val.district, mobile: val.mobile})
                     }}><div style={{ diplay: 'flex', flexDirection: 'row' }}>
-                        <h6>{val.name}</h6><span>{val.distance}</span></div></DropdownItem>
+                        <h6>{val.name}</h6><span >{getDistance(val['hospitalLocation'].coordinates) } km</span></div></DropdownItem>
                   </div><hr />
                 </div>
               )

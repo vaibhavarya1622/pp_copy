@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setUserLatitudeLocation,
-  setUserLongitudeLocation,
-} from "../../redux/User/user.actions";
-import {
-  fetchHospitalDetailsSuccess
-} from '../../redux/Hospital/hospitalActions'
+import {setUserLatitudeLocation,setUserLongitudeLocation,} from "../../redux/User/user.actions";
+import {fetchHospitalDetailsSuccess} from '../../redux/Hospital/hospitalActions'
 import hospitalmarkersvg from "./../../images/assets/hospitalmarkersvg.svg"
 import HospitalList from './../HospitalList/HospitalList'
 import usermarkersvg from "./../../images/patient.png"
@@ -35,17 +30,17 @@ const HomePageSideMap = () => {
     (state) => state.Hospital.hospitalDetails
   );
  
-  
-  const getDistance = (destination) => {
-    let origin = [25.27794, 83.00244]
-    var R = 3958.8; // Radius of the Earth in miles
-    var rlat1 = destination[0] * (Math.PI / 180); // Convert degrees to radians
-    var rlat2 = origin[0] * (Math.PI / 180); // Convert degrees to radians
-    var difflat = rlat2 - rlat1; // Radian difference (latitudes)
-    var difflon = (destination[1] - origin[1]) * (Math.PI / 180); // Radian difference (longitudes)
-    var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
-    return Math.round(d);
-  }
+  // const getDistance = (destination) => {
+  //   let origin = [25.27794, 83.00244]
+  //   var R = 3958.8; // Radius of the Earth in miles
+  //   var rlat1 = destination[0] * (Math.PI / 180); // Convert degrees to radians
+  //   var rlat2 = origin[0] * (Math.PI / 180); // Convert degrees to radians
+  //   var difflat = rlat2 - rlat1; // Radian difference (latitudes)
+  //   var difflon = (destination[1] - origin[1]) * (Math.PI / 180); // Radian difference (longitudes)
+  //   var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
+  //   return Math.round(d);
+  // }
+
   var initMap = () => {
     map = new window.google.maps.Map(document.getElementById("map"), {
       center: {lat: 16.74674, lng: 81.69071},
@@ -83,6 +78,7 @@ const HomePageSideMap = () => {
     axios.get('https://server.prioritypulse.co.in/users/hospitals')
     .then(response=>{
       const data=response.data
+      console.log(data);
       var hospitalList=data.map(hospital=>{
         return {
           coordinates:hospital['hospitalLocation'].coordinates,
@@ -91,7 +87,7 @@ const HomePageSideMap = () => {
           district:hospital['district'],
           state:hospital['state'],
           numbers:hospital['hospitalNumbers'],
-          distance:getDistance(hospital['hospitalLocation'].coordinates)
+          // distance:getDistance(hospital['hospitalLocation'].coordinates)
         }
       })
       hospitalList.sort((a,b)=>a.distance-b.distance)
@@ -99,7 +95,6 @@ const HomePageSideMap = () => {
       dispatch(fetchHospitalDetailsSuccess(hospitalList))
     })
 
-    //maps
 
     //search bar start
     const input = document.getElementById("mapsearch");
@@ -203,7 +198,6 @@ const HomePageSideMap = () => {
           <button onClick={(e) => myLocation()} className="myLocationBtn">
             <LocationOnIcon style={{ color: "#960A0A"}} /> My Location
           </button>
-
         </div>
       </div>
       <HospitalList map={map} infoWindow={infoWindow} />
