@@ -193,7 +193,7 @@ const HomePageSideMap = () => {
         <div className="input">
           <SearchIcon style={{ color: "#390999", marginLeft: "0.3rem"}} />
           <input
-            placeholder="Search nearby hospitals.."
+            placeholder="Search nearby hospitals..."
             className="searchHospital"
             id="mapsearch"
           />

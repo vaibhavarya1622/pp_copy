@@ -22,7 +22,7 @@
   
   .footer_logo{
     width: 30vw;
-    padding: 20px 50px;
+    padding: 0 40px;
   }
   
   .footer_dialog{
@@ -583,4 +583,15 @@
       width: fit-content;
       margin: 0 auto !important;
     }
+  }
+
+  @media screen and (max-width: 380px) {
+    
+    .footer_logos img{
+      width: 50px;
+    }
+    .footer_dialog{
+      margin-left: 40px;
+    }
+    
   }

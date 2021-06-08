@@ -10,6 +10,7 @@ import decodePolyline from "decode-google-map-polyline";
 let polyline;
 const HospitalList = (props) => {
   const [dropdownOpen, setOpen] = useState(false);
+  const [cardOpen, setCardOpen] = useState(false);
 
   const toggle = () => setOpen(!dropdownOpen);
 
@@ -71,6 +72,7 @@ const HospitalList = (props) => {
                     {/* <DropdownItem onClick={() => setHospital({ name: val.name,rating:val.rating, description: val.description})}><h5>{val.name}</h5></DropdownItem> */}
                     <DropdownItem onClick={() => {
                       setHospitalCenter(val)
+                      setCardOpen(true)
                       setHospital({ name: val.name, city: val.city, district: val.district, mobile: val.mobile })
                     }}><div style={{ diplay: 'flex', flexDirection: 'row' }}>
                         <h6>{val.name}</h6><span>{val.distance}</span></div></DropdownItem>
@@ -81,20 +83,20 @@ const HospitalList = (props) => {
           </div>
         </DropdownMenu>
       </ButtonDropdown>
-      {hospital.name !== '' ? <div className="card">
+      {hospital.name !== '' && cardOpen ? <div className="card">
         <div className="card-body">
 
           <Container>
             <Row>
-              <Col sm={{ size: 'auto', offset: 1 }}><div><h4>Hospital Details:  </h4></div></Col>
+              <Col sm={{ size: 'auto', offset: 1 }}><div ><h4 className="hospital-title">Hospital Details: <span style={{ marginLeft: "150px", color: "FF024E" }} onClick={() =>setCardOpen(false)}>X</span>  </h4></div></Col>
             </Row>
-            <Row>
-              <Col sm={{ size: 'auto', offset: 3 }}><div style={{ width: '220px' }} class="shadow"><h6 style={{ padding: '10px' }}>Name  : {hospital.name} </h6></div></Col>
-              <Col sm={{ size: 'auto', offset: 3 }}><div style={{ width: '220px' }} class="shadow"><h6 style={{ padding: '10px' }}>City  : {hospital.city} </h6></div></Col>
+            <Row xs="2" className="row">
+              <Col sm={{ size: 'auto', offset: 3 }}><div className="shadow"><h6 className="hospital-detail" style={{ padding: '10px' }}> {hospital.name} </h6></div></Col>
+              <Col sm={{ size: 'auto', offset: 3 }}><div className="shadow"><h6 className="hospital-detail" style={{ padding: '10px' }}>City  : {hospital.city} </h6></div></Col>
             </Row>
-            <Row>
-              <Col sm={{ size: 'auto', offset: 3 }}><div style={{ width: '220px' }} class="shadow"><h6 style={{ padding: '10px' }}>District  : {hospital.district} </h6></div></Col>
-              <Col sm={{ size: 'auto', offset: 3 }}><div style={{ width: '220px' }} class="shadow"><h6 style={{ padding: '10px' }}>Phone:  {hospital.mobile}</h6></div></Col>
+            <Row xs="2" className="row">
+              <Col sm={{ size: 'auto', offset: 3 }}><div className="shadow"><h6 className="hospital-detail" style={{ padding: '10px' }}>District  : {hospital.district} </h6></div></Col>
+              <Col sm={{ size: 'auto', offset: 3 }}><div className="shadow"><h6 className="hospital-detail" style={{ padding: '10px' }}>Phone:  {hospital.mobile}</h6></div></Col>
             </Row>
           </Container>
 
