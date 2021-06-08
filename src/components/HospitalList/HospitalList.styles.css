@@ -88,6 +88,10 @@ hr {
 	font-size: 5px;
 	width: 230px;
 }
+.cardCross{
+	margin-left: 1000px;
+	color: "FF024E" ;
+}
 
 @media screen and (max-width: 380px) {
 	.hospital-detail {
@@ -106,5 +110,9 @@ hr {
 	}
 	.card {
 		top: 520px;
+	}
+	.cardCross{
+		margin-left: 100px;
+		color: "FF024E" ;
 	}
   }
