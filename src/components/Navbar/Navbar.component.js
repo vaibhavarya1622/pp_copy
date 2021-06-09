@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './navbar.style.css'
+import './header.style.css'
 import logo from "../../images/PP_logo_yellow.png"
 import MenuIcon from "@material-ui/icons/Menu";
 import ClearIcon from "@material-ui/icons/Clear";

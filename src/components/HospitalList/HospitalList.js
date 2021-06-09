@@ -78,7 +78,7 @@ const HospitalList = (props) => {
   return (
     <div>
       <ButtonDropdown direction="right" isOpen={dropdownOpen} toggle={toggle} style={{ zIndex: 10 }}>
-        <DropdownToggle caret style={{ backgroundColor: "white", color: "black", marginTop: "10px", marginBottom: "15px", marginLeft: "5px" }}>
+        <DropdownToggle caret style={{ backgroundColor: "white", color: "black", marginTop: "10px", marginBottom: "15px", marginLeft: "15px" }}>
           {null}
         </DropdownToggle>
         <DropdownMenu className="dropdown-menu" positionFixed={true}>
@@ -111,15 +111,15 @@ const HospitalList = (props) => {
 
           <Container>
             <Row>
-              <Col sm={{ size: 'auto', offset: 1 }}><div ><h4 className="hospital-title">Hospital Details: <span className="cardCross"  onClick={() => setCardOpen(false)}>X</span>  </h4></div></Col>
+              <Col sm={{ size: 'auto', offset: 'auto' }}><div className="hospital-details" ><h4 className="hospital-title">Hospital Details: <span className="cardCross" style={{position: "absolute", right: "40px"}}  onClick={() => setCardOpen(false)}>X</span>  </h4></div></Col>
             </Row>
             <Row xs="2" className="row">
-              <Col sm={{ size: 'auto', offset: 3 }}><div className="shadow"><h6 className="hospital-detail" style={{ padding: '10px' }}> {hospital.name} </h6></div></Col>
-              <Col sm={{ size: 'auto', offset: 3 }}><div className="shadow"><h6 className="hospital-detail" style={{ padding: '10px' }}>City  : {hospital.city} </h6></div></Col>
+              <Col sm={{ size: 'auto', offset: 2 }}><div className="shadow"><h6 className="hospital-detail" style={{ padding: '10px' }}> {hospital.name} </h6></div></Col>
+              <Col sm={{ size: 'auto', offset: 2 }}><div className="shadow"><h6 className="hospital-detail" style={{ padding: '10px' }}>City  : {hospital.city} </h6></div></Col>
             </Row>
             <Row xs="2" className="row">
-              <Col sm={{ size: 'auto', offset: 3 }}><div className="shadow"><h6 className="hospital-detail" style={{ padding: '10px' }}>District  : {hospital.district} </h6></div></Col>
-              <Col sm={{ size: 'auto', offset: 3 }}><div className="shadow"><h6 className="hospital-detail" style={{ padding: '10px' }}>Phone:  {hospital.mobile}</h6></div></Col>
+              <Col sm={{ size: 'auto', offset: 2 }}><div className="shadow"><h6 className="hospital-detail" style={{ padding: '10px' }}>District  : {hospital.district} </h6></div></Col>
+              <Col sm={{ size: 'auto', offset: 2 }}><div className="shadow"><h6 className="hospital-detail" style={{ padding: '10px' }}>Phone:  {hospital.mobile}</h6></div></Col>
             </Row>
           </Container>
 
