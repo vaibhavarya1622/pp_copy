@@ -39,7 +39,7 @@ hr {
 	cursor: pointer;
 }
 
-/* Info Window Css */
+/* Info Window Css
 #iw-container {
 	width:160px;
 }
@@ -75,7 +75,7 @@ hr {
 	font-size: 16px;
 	font-weight: 700;
 	padding: 5px 0;
-}
+} */
 
 @media screen and (max-width: 1300px) {
     .card {
