@@ -202,7 +202,7 @@ const HomePageSideMap = () => {
 
   return (
     <main>
-      <div className="SearchBar">
+      {/* <div className="SearchBar">
         <div className="input">
           <SearchIcon style={{ color: "#390999", marginLeft: "0.3rem" }} />
           <input
@@ -213,28 +213,27 @@ const HomePageSideMap = () => {
         </div>
 
         <div className="button">
-          {/* <button onClick={(e) => myLocation()} className="myLocationBtn"> */}
+          <button onClick={(e) => myLocation()} className="myLocationBtn">
           <button className="myLocationBtn">
             <LocationOnIcon style={{ color: "#960A0A" }} /> My Location
           </button>
         </div>
       </div>
-      {/* <SimpleMap /> */}
-      {/* <HospitalList map={map} infoWindow={infoWindow} /> */}
+      <SimpleMap /> 
+      <HospitalList map={map} infoWindow={infoWindow} />
+      <div className="indexMap" id="map"></div> */}
       <HospitalList />
-
-      {/* <div className="indexMap" id="map"></div> */}
     </main>
   );
 };
 
-function loadScript(url) {
-  var index = window.document.getElementsByTagName("script")[0];
-  var script = window.document.createElement("script");
-  script.src = url;
-  script.async = true;
-  script.defer = true;
-  index.parentNode.insertBefore(script, index);
-}
+// function loadScript(url) {
+//   var index = window.document.getElementsByTagName("script")[0];
+//   var script = window.document.createElement("script");
+//   script.src = url;
+//   script.async = true;
+//   script.defer = true;
+//   index.parentNode.insertBefore(script, index);
+// }
 
 export default HomePageSideMap;

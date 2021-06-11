@@ -7,12 +7,15 @@ import PhoneIcon from '@material-ui/icons/Phone';
 import decodePolyline from "decode-google-map-polyline";
 import axios from 'axios';
 import SimpleMap from './SimpleMap';
+import LocationOnIcon from '@material-ui/icons/LocationOn';
+import SearchIcon from '@material-ui/icons/Search';
 
 let polyline;
 const HospitalList = (props) => {
 
   const [hospitals, setHospitals] = useState([]);
   const [oneHospital, setOneHospital] = useState([]);
+  const [userLocation, setUserLocation] = useState();
   axios.get('https://server.prioritypulse.co.in/users/hospitals')
     .then((res) => {
       setHospitals(res.data);
@@ -36,6 +39,23 @@ const HospitalList = (props) => {
     var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
     return Math.round(d);
   }
+  const myLocation = (e) => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          }
+          // console.log(pos.lat)
+          // console.log(pos.lng)
+          setUserLocation([pos])
+          console.log(userLocation)
+        }
+        // console.log(userLocation)
+      )
+    }
+  };
 
 
   // const setHospitalCenter = (place) => {
@@ -75,12 +95,25 @@ const HospitalList = (props) => {
   //   }
   // }
 
-
-
   const [hospital, setHospital] = useState({ name: '', city: '', district: '', mobile: '', distance: '' });
   return (
     <div>
-      
+      <div className="SearchBar">
+        <div className="input">
+          <SearchIcon style={{ color: "#390999", marginLeft: "0.3rem" }} />
+          <input
+            placeholder="Search nearby hospitals..."
+            className="searchHospital"
+            id="mapsearch"
+          />
+        </div>
+
+        <div className="button">
+          <button onClick={(e) => myLocation()} className="myLocationBtn">
+            <LocationOnIcon style={{ color: "#960A0A" }} /> My Location
+          </button>
+        </div>
+      </div>
       <ButtonDropdown direction="right" isOpen={dropdownOpen} toggle={toggle} style={{ zIndex: 10 }}>
         <DropdownToggle caret style={{ backgroundColor: "white", color: "black", marginTop: "10px", marginBottom: "15px", marginLeft: "15px" }}>
           {null}
@@ -128,7 +161,7 @@ const HospitalList = (props) => {
           </Container>
         </div>
       </div> : null}
-      {!cardOpen ? <SimpleMap allHospitals={hospitals} /> : <SimpleMap allHospitals={oneHospital} />}
+      {!cardOpen ? <SimpleMap allHospitals={hospitals} myLocation={userLocation} /> : <SimpleMap allHospitals={oneHospital} myLocation={userLocation} />}
     </div>
   );
 }
