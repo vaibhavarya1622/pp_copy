@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Container, Row, Col } from 'reactstrap';
 import { useSelector } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -6,23 +6,30 @@ import './HospitalList.styles.css';
 import PhoneIcon from '@material-ui/icons/Phone';
 import decodePolyline from "decode-google-map-polyline";
 import axios from 'axios';
-import SimpleMap from './SimpleMap';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import SearchIcon from '@material-ui/icons/Search';
+import GoogleMapReact from 'google-map-react';
+import Marker from './Marker';
 
 let polyline;
 const HospitalList = (props) => {
 
   const [hospitals, setHospitals] = useState([]);
+  const [temp, setTemp] = useState([])
   const [oneHospital, setOneHospital] = useState([]);
   const [userLocation, setUserLocation] = useState();
-  axios.get('https://server.prioritypulse.co.in/users/hospitals')
+  const [center, setCenter] = useState();
+  
+  useEffect(() => {
+    axios.get('https://server.prioritypulse.co.in/users/hospitals')
     .then((res) => {
       setHospitals(res.data);
+      setTemp(res.data)
     })
     .catch((err) => {
       console.log(err);
     })
+  }, [])
 
   const [dropdownOpen, setOpen] = useState(false);
   const [cardOpen, setCardOpen] = useState(false);
@@ -39,7 +46,7 @@ const HospitalList = (props) => {
     var d = 2 * R * Math.asin(Math.sqrt(Math.sin(difflat / 2) * Math.sin(difflat / 2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.sin(difflon / 2) * Math.sin(difflon / 2)));
     return Math.round(d);
   }
-  const myLocation = (e) => {
+  {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -47,53 +54,79 @@ const HospitalList = (props) => {
             lat: position.coords.latitude,
             lng: position.coords.longitude,
           }
-          // console.log(pos.lat)
-          // console.log(pos.lng)
-          setUserLocation([pos])
-          console.log(userLocation)
+          setCenter(pos)
+          setUserLocation(pos)
         }
-        // console.log(userLocation)
       )
     }
-  };
-
-
-  // const setHospitalCenter = (place) => {
-  //   //   var content = '<div id="iw-container">' +
-  //   //     '<div class="iw-title">' + place.name + '</div>' +
-  //   //     '<div class="iw-content">' +
-  //   //     '<div class="iw-subTitle">near</div>' +
-  //   //     '<p >'+place.distance+' KM  away '+
-  //   //   '</div>' +
-  //   // '</div>';
-  //   // var bounds=new window.google.maps.LatLngBounds()
-  //   // var pos=new window.google.maps.LatLng(place.coords[0],place.coords[1])
-  //   // props.map.setZoom(14)
-  //   // props.map.panTo({lat:place.coords[0],lng:place.coords[1]})
-  //   // props.infoWindow.setPosition({lat:place.coords[0],lng:place.coords[1]})
-  //   // props.infoWindow.setContent(content)
-  //   // props.infoWindow.open(props.map)
-  //   // bounds.extend(pos)
-  //   // props.map.fitBounds(bounds)
-  //   if (props.map) {
-  //     if (polyline !== undefined) {
-  //       polyline.setMap(null)
-  //     }
-
-  //     // var pcoords1=[{ lat: 25.27794, lng: 83.00244 },{lat:place.coords[0],lng:place.coords[1]}]
-  //     var pcoords1 = decodePolyline("czeeB}erqNGGe@g@OMa@a@a@_@y@o@IEg@]y@c@OEUGAAu@w@KDi@VGFGDY\[d@e@r@ALU|AQv@M^CDEBC@E?C?C?CASGa@SeAe@SMUOc@Y[SKEo@[y@]iAm@o@a@i@W?DEPAJCHANEN?@OAi@Gi@G_@KC?KCGCIAIGECOI_@OGCEAEAE?E?K@iBGg@Bs@?aA?c@A[Aa@Ci@IOA}@GSAoFIy@Ac@GuAe@uB|FKZoApDaBlEg@zAe@lAe@tA_BpEqAzDy@~Bi@zAi@zAiAfDUn@iAfDKVGPiAdDIRGRk@`Bk@fBENCNERERCREVCTCRAPAT?R?T?T@V@P?@@NBXBVBTBRDTFVFTHRFTHTTb@FNJPx@rAf@r@`ApAdAtAhChDLRNTLPFHDFv@rALRDJP^L^Rj@Lj@BPDNFh@D^BPBND\Hj@NtALdANtA`@~CHj@Fb@NlAjAhIFd@F|@Br@?VAN?B?H?f@AXARCVCTV^X@")
-  //     // console.log(pcoords1[0])
-  //     // console.log(pcoords1[pcoords1.length - 1])
-  //     polyline = new window.google.maps.Polyline({
-  //       path: pcoords1,
-  //       geodesic: true,
-  //       strokeColor: "#0000FF",
-  //       strokeOpacity: 1.0,
-  //       strokeWeight: 5,
-  //     })
-  //     polyline.setMap(props.map)
+  }
+  // const myLocation = (e) => {
+  //   if (navigator.geolocation) {
+  //     navigator.geolocation.getCurrentPosition(
+  //       (position) => {
+  //         const pos = {
+  //           lat: position.coords.latitude,
+  //           lng: position.coords.longitude,
+  //         }
+  //         setUserLocation([pos])
+  //       }
+  //     )
   //   }
-  // }
+  // };
+  const updateHospital = (e) => {
+    setOpen(true)
+    const key = e.target.value;
+    const filtered = temp.filter(hospital => {
+      return hospital.name.toLowerCase().includes(key.toLowerCase())
+     })
+     setHospitals(filtered);
+ }
+ const SimpleMap = (temp, card) => {
+  // console.log(props.center)
+  console.log(temp);
+  return (
+      <div style={{ height: '65vh', width: '100%', marginTop: '-60px', marginBottom: '60px' }}>
+          <GoogleMapReact
+              bootstrapURLKeys={{ key: 'AIzaSyATwnp3e3ZL7__Oskpdo8Gutgls6ir4FeU' }}
+              center={temp}
+              defaultZoom={8}
+          >
+              {!card ?  hospitals.map(hospital => {
+                  return (    
+                      <Marker
+                          // lat={16.747401}
+                          // lng={81.69053}
+                          lat={hospital['hospitalLocation'].coordinates[0]}
+                          lng={hospital['hospitalLocation'].coordinates[1]}
+                          name={hospital.name}
+                          color="red"
+                      />
+                  )
+              })
+              : oneHospital.map(hospital => {
+                  return (    
+                      <Marker
+                          // lat={16.747401}
+                          // lng={81.69053}
+                          lat={hospital['hospitalLocation'].coordinates[0]}
+                          lng={hospital['hospitalLocation'].coordinates[1]}
+                          name={hospital.name}
+                          color="red"
+                      />
+                  )
+              })}
+              {userLocation ?
+                      <Marker
+                          lat={userLocation.lat}
+                          lng={userLocation.lng}
+                          name="You are here"
+                          color="blue"
+                      />
+                      :null}
+          </GoogleMapReact>
+      </div>
+  );
+}
 
   const [hospital, setHospital] = useState({ name: '', city: '', district: '', mobile: '', distance: '' });
   return (
@@ -105,11 +138,12 @@ const HospitalList = (props) => {
             placeholder="Search nearby hospitals..."
             className="searchHospital"
             id="mapsearch"
+            onChange={updateHospital}
           />
         </div>
-
         <div className="button">
-          <button onClick={(e) => myLocation()} className="myLocationBtn">
+          {/* <button onClick={(e) => myLocation()} className="myLocationBtn"> */}
+          <button className="myLocationBtn">
             <LocationOnIcon style={{ color: "#960A0A" }} /> My Location
           </button>
         </div>
@@ -131,10 +165,10 @@ const HospitalList = (props) => {
                 <div>
                   <div key={id}>
                     <DropdownItem onClick={() => {
-                      // setHospitalCenter(val)
                       setCardOpen(true)
                       setHospital({ name: val.name, city: val.city, district: val.district, mobile: val.mobile })
                       setOneHospital([val])
+                      setCenter({lat:val['hospitalLocation'].coordinates[0],lng:val['hospitalLocation'].coordinates[1]})
                     }}><div style={{ diplay: 'flex', flexDirection: 'row' }}>
                         <h6>{val.name}</h6><span >{getDistance(val['hospitalLocation'].coordinates)} km</span></div></DropdownItem>
                   </div><hr />
@@ -161,7 +195,8 @@ const HospitalList = (props) => {
           </Container>
         </div>
       </div> : null}
-      {!cardOpen ? <SimpleMap allHospitals={hospitals} myLocation={userLocation} /> : <SimpleMap allHospitals={oneHospital} myLocation={userLocation} />}
+      {/* <SimpleMap allHospitals={cardOpen ? oneHospital :hospitals} myLocation={userLocation} center={center} /> */}
+      {SimpleMap(center, cardOpen)}
     </div>
   );
 }

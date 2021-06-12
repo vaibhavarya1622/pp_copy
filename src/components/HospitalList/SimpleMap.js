@@ -4,13 +4,14 @@ import Marker from './Marker';
 
 
 const SimpleMap = (props) => {
-    const [center, setCenter] = useState({ lat: 16.65, lng: 81.3 });
+    const [center, setCenter] = useState();
     const [zoom, setZoom] = useState(10);
+    console.log(props.center)
     return (
         <div style={{ height: '65vh', width: '100%', marginTop: '-60px', marginBottom: '60px' }}>
             <GoogleMapReact
                 bootstrapURLKeys={{ key: 'AIzaSyATwnp3e3ZL7__Oskpdo8Gutgls6ir4FeU' }}
-                defaultCenter={center}
+                defaultCenter={props.center}
                 defaultZoom={zoom}
             >
                 {props.allHospitals.map(hospital => {
@@ -26,19 +27,16 @@ const SimpleMap = (props) => {
                     )
                 })
                 }
-                {props.myLocation ? props.myLocation.map(user => {
-                    return (    
+                {props.myLocation ?
                         <Marker
                             // lat={16.747401}
                             // lng={81.69053}
-                            lat={user.lat}
-                            lng={user.lng}
+                            lat={props.myLocation.lat}
+                            lng={props.myLocation.lng}
                             name="You are here"
                             color="blue"
                         />
-                    )
-                }) :null
-                }
+                        :null}
             </GoogleMapReact>
         </div>
     );
