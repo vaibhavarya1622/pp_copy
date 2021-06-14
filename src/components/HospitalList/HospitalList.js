@@ -68,7 +68,7 @@ const HospitalList = (props) => {
  }
  const SimpleMap = (temp, card) => {
   return (
-      <div style={{ height: '65vh', width: '100%', marginTop: '-60px', marginBottom: '45px' }}>
+      <div style={{ height: '68vh', width: '100%', marginTop: '-64px', marginBottom: '40px' }}>
           <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyATwnp3e3ZL7__Oskpdo8Gutgls6ir4FeU' }}
               center={temp}
@@ -148,7 +148,7 @@ const HospitalList = (props) => {
                   <div key={id}>
                     <DropdownItem onClick={() => {
                       setCardOpen(true)
-                      setHospital({ name: val.name, city: val.city, district: val.district, mobile: val.mobile })
+                      setHospital({ name: val.name, city: val.city, district: val.district, mobile: val.hospitalNumbers[0] })
                       setOneHospital([val])
                       setCenter({lat:val['hospitalLocation'].coordinates[0],lng:val['hospitalLocation'].coordinates[1]})
                     }}><div style={{ diplay: 'flex', flexDirection: 'row' }}>

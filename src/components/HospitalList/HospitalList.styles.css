@@ -142,6 +142,9 @@ hr {
 	.card{
 		margin-left: 2px;
 	}
+	.hospital-detail{
+		font-size: 10px;
+	}
   }
 
 @media screen and (max-width: 550px) {
@@ -160,6 +163,9 @@ hr {
 	}
 	.card{
 		margin-left: 0;
+	}
+	.hospital-detail{
+		font-size: 10px;
 	}
   }
 
@@ -187,7 +193,7 @@ hr {
 		font-size: 13px;
 	}
 	.hospital-detail{
-		font-size: 5px;
+		font-size: 8px;
 	}
 	.myLocationBtn{
 		width: 115px;
