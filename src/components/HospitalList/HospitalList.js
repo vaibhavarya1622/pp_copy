@@ -126,7 +126,7 @@ const HospitalList = (props) => {
         </div>
         <div className="button">
           <button onClick={() => setCenter(userLocation)} className="myLocationBtn">
-            <LocationOnIcon style={{ color: "#960A0A" }} /> My Location
+            <LocationOnIcon style={{ color: "#960A0A" }} /><span className="button-text"> My Location</span>
           </button>
         </div>
       </div>

@@ -10,8 +10,7 @@
 }
 
 .navbar_logo {
-  max-width: 300px;
-  width: 30vw;
+  width: 300px;
   min-width: 150px;
   height: auto;
   line-height: 60px;
@@ -164,9 +163,60 @@ nav .start-login,a:nth-child(6):hover~.animation{
     display: none;
   }
   .navbar_logo {
-    min-width: 250px;
-    width: 70vw;
-    max-width: 300px;
+    min-width: 150px;
+    width:250px;
+  }
+  nav.mid {
+    display: block;
+    width: 100%;
+    margin: 0;
+    align-items: center;
+    text-align: center;
+    animation: fadeOutAnimation 1s;
+  }
+  nav.mid div {
+    display: none;
+  }
+  nav.active div {
+    display: none;
+  }
+  nav.active {
+    display: block;
+    width: 100%;
+    margin: 0;
+    align-items: center;
+    text-align: center;
+    animation: fadeInAnimation 1s;
+  }
+  nav.active a,
+  nav.mid a {
+    padding: 10px 0;
+    margin: 0 auto;
+  }
+  nav.active a:hover {
+    border-bottom: solid gold 5px;
+    border-radius: 5px;
+    transition: all 0.5s ease;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .menu-toggle {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin-right: 2rem;
+    cursor: pointer;
+    text-align: center;
+    font-size: 30px;
+    transition: all 1s ease;
+  }
+  nav {
+    display: none;
+  }
+  .navbar_logo {
+    min-width: 150px;
+    width:170px;
   }
   nav.mid {
     display: block;
