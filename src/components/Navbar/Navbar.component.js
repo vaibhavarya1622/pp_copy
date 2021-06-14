@@ -41,7 +41,7 @@ function Header({ location }) {
           <ClearIcon style={{ fontSize: "30px", color: "white" }} />
         )}
       </div>
-      <nav className={classna} style={{paddingRight: "0"}}>
+      <nav className={classna}>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/token">TrackAmbulance</NavLink>
         <NavLink to="#">PastRide</NavLink>
