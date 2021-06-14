@@ -3,8 +3,6 @@ import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem, Container, 
 import { useSelector } from 'react-redux'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './HospitalList.styles.css';
-import PhoneIcon from '@material-ui/icons/Phone';
-import decodePolyline from "decode-google-map-polyline";
 import axios from 'axios';
 import LocationOnIcon from '@material-ui/icons/LocationOn';
 import SearchIcon from '@material-ui/icons/Search';
@@ -60,19 +58,6 @@ const HospitalList = (props) => {
       )
     }
   }
-  // const myLocation = (e) => {
-  //   if (navigator.geolocation) {
-  //     navigator.geolocation.getCurrentPosition(
-  //       (position) => {
-  //         const pos = {
-  //           lat: position.coords.latitude,
-  //           lng: position.coords.longitude,
-  //         }
-  //         setUserLocation([pos])
-  //       }
-  //     )
-  //   }
-  // };
   const updateHospital = (e) => {
     setOpen(true)
     const key = e.target.value;
@@ -82,14 +67,12 @@ const HospitalList = (props) => {
      setHospitals(filtered);
  }
  const SimpleMap = (temp, card) => {
-  // console.log(props.center)
-  console.log(temp);
   return (
-      <div style={{ height: '65vh', width: '100%', marginTop: '-60px', marginBottom: '60px' }}>
+      <div style={{ height: '65vh', width: '100%', marginTop: '-60px', marginBottom: '45px' }}>
           <GoogleMapReact
               bootstrapURLKeys={{ key: 'AIzaSyATwnp3e3ZL7__Oskpdo8Gutgls6ir4FeU' }}
               center={temp}
-              defaultZoom={8}
+              defaultZoom={10}
           >
               {!card ?  hospitals.map(hospital => {
                   return (    
@@ -142,8 +125,7 @@ const HospitalList = (props) => {
           />
         </div>
         <div className="button">
-          {/* <button onClick={(e) => myLocation()} className="myLocationBtn"> */}
-          <button className="myLocationBtn">
+          <button onClick={() => setCenter(userLocation)} className="myLocationBtn">
             <LocationOnIcon style={{ color: "#960A0A" }} /> My Location
           </button>
         </div>
@@ -178,6 +160,7 @@ const HospitalList = (props) => {
           </div>
         </DropdownMenu>
       </ButtonDropdown>
+      {SimpleMap(center, cardOpen)}
       {hospital.name !== '' && cardOpen ? <div className="card">
         <div className="card-body">
           <Container>
@@ -195,8 +178,6 @@ const HospitalList = (props) => {
           </Container>
         </div>
       </div> : null}
-      {/* <SimpleMap allHospitals={cardOpen ? oneHospital :hospitals} myLocation={userLocation} center={center} /> */}
-      {SimpleMap(center, cardOpen)}
     </div>
   );
 }

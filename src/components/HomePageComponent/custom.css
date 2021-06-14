@@ -1,34 +1,4 @@
-  .indexMap {
-    position: relative;
-    width: 100vw;
-    height: 550px;
-    top: -60px;
-  }
-  
-  @media screen and (max-width: 1300px) {
-    .indexMap {
-      width: 1290px;
-      height: 510px;
-    }
-  }
-  @media screen and (max-width: 1200px) {
-    .indexMap {
-      width: 1200px;
-      height: 510px;
-    }
-  }
-  @media screen and (max-width: 960px) {
-    .indexMap {
-      width: 1100px;
-      height: 500px;
-    }
-  }
-  @media screen and (max-width: 640px) {
-    .indexMap {
-      width: 800px;
-      height: 480px;
-    }
-  }
+
 .SearchBar{
   margin-top: 10px;
  display: flex;
@@ -61,6 +31,7 @@ margin-right: 25px;
 .myLocationBtn:focus{
   outline: none;
 }
+
 @media screen and (max-width: 550px) {
   .input{
     max-width: 210px;

@@ -1,77 +1,80 @@
 
 .footer {
-    background-image: linear-gradient(to right, #a116ef, #390999);
-    width: 100vw;
-    height: 38vh;
-    padding-top: 20px;
+  background-image: linear-gradient(to right, #a116ef, #390999);
+  width: 100vw;
+  height: auto;
+  padding-top: 20px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer_logos {
+  position: relative;
+}
+
+.footer_logos img {
+  width: 60px;
+  margin: 20px;
+  padding: 0 10px;
+}
+
+.footer_logo {
+  width: 40vw;
+  padding: 20px 50px;
+  object-fit: contain;
+}
+
+.footer_dialog {
+  display: flex;
+  width: 50vw;
+  max-width: 500px;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer_foottextcontainer {
+  position: relative;
+}
+
+.footer_foottext {
+  display: flex;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.footer_foottext img {
+  width: 30px;
+  margin: 0 20px;
+}
+
+@media screen and (max-width: 860px) {
+
+
+.footer {
+    height:auto;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .footer_logos {
     position: relative;
     display: flex;
-    justify-content: space-between;
   }
-  
-  .footer_logos {
-    position: absolute;
-    right: 30px;
-  }
-  
-  .footer_logos img {
-    width: 60px;
-    margin: 20px;
-    padding: 0 10px;
-  }
-  
   .footer_logo {
-    width: 400px;
-    object-fit: contain;
-    padding: 20px 50px;
+    width: 60vw;
+    min-width: 300px;
+    padding: 0;
+    margin: 0 auto;
   }
-  
   .footer_dialog {
-    display: flex;
+    flex-direction: column;
   }
-  
   .footer_foottextcontainer {
-    position: absolute;
-    right: 10px;
-    bottom: -5px;
-    padding-right: 50px;
+    position: relative;
   }
-  
-  .footer_foottext {
-    display: flex;
-    padding: 10px;
-  }
-  
-  .footer_foottext img {
-    width: 30px;
-    margin: 0 20px;
-  }
-  
-  @media screen and (max-width: 860px) {
-  
-  .footer {
-      height:410px;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding-top: 20px;
-    }
-    .footer_logos {
-      position: relative;
-    }
-    .footer_logo {
-      width: 60vw;
-      min-width: 300px;
-      padding: 0;
-      margin: 0 auto;
-    }
-    .footer_dialog {
-      flex-direction: column;
-    }
-    .footer_foottextcontainer {
-      position: relative;
-      margin: 0 auto;
-    }
-  
-  }
+
+}
