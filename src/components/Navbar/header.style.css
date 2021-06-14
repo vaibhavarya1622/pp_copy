@@ -6,7 +6,7 @@
   padding: 10px;
   border-radius: 0px 0px 30px 30px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  
+  margin: auto;
 }
 
 .navbar_logo {
@@ -148,7 +148,7 @@ nav .start-login,a:nth-child(6):hover~.animation{
   }
 }
 
-@media screen and (max-width: 860px) {
+@media screen and (max-width: 555px) and (min-width: 401px) {
   .menu-toggle {
     display: block;
     width: 40px;
@@ -192,6 +192,58 @@ nav .start-login,a:nth-child(6):hover~.animation{
   nav.mid a {
     padding: 10px 0;
     margin: 0 auto;
+  }
+  nav.active a:hover {
+    border-bottom: solid gold 5px;
+    border-radius: 5px;
+    transition: all 0.5s ease;
+  }
+}
+
+@media screen and (max-width: 860px) and (min-width: 560px) {
+  .menu-toggle {
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin-right: 5rem;
+    cursor: pointer;
+    text-align: center;
+    font-size: 30px;
+    transition: all 1s ease;
+  }
+  nav {
+    display: none;
+  }
+  .navbar_logo {
+    min-width: 150px;
+    width:250px;
+  }
+  nav.mid {
+    display: block;
+    width: 100%;
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    animation: fadeOutAnimation 1s;
+  }
+  nav.mid div {
+    display: none;
+  }
+  nav.active div {
+    display: none;
+  }
+  nav.active {
+    display: block;
+    width: 100%;
+    margin: auto;
+    align-items: center;
+    text-align: center;
+    animation: fadeInAnimation 1s;
+  }
+  nav.active a,
+  nav.mid a {
+    padding: 10px 0;
+    margin: auto;
   }
   nav.active a:hover {
     border-bottom: solid gold 5px;
