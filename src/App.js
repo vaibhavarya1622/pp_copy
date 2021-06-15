@@ -8,6 +8,7 @@ import Login from './components/Login';
 import Profile from './components/Profile';
 import Home from './components/Home'
 import HomepageComponent from './components/HomePageComponent/HomePageComponent'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (

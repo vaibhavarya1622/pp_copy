@@ -23,9 +23,7 @@
     width:300px;
     overflow: scroll;
 }
-hr {
-    margin: 0.1em auto;
-}
+
 .shadow {
 	box-shadow: 0 8px 6px -6px black;
 	background-color: rgb(248, 244, 244);
