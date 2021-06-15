@@ -155,9 +155,17 @@ const HospitalList = (props) => {
       <div>
         <Modal isOpen={modalOpen} toggle={toggleOpen}>
           <ModalHeader toggle={toggleOpen}>Send Your Location</ModalHeader>
-          <ModalBody>
-            <input placeholder="Mobile..." style={{ margin: "0.5rem" }} onChange={updateMobile} />
-            <input placeholder="Confirm Mobile..." style={{ margin: "2rem" }} onChange={updateSecMobile} />
+          <ModalBody >
+          <div style={{textAlign: "center"}}>
+            <Row>
+              <Col md={6} style={{marginBottom: "2px", marginTop: "2px"}}>
+               <input placeholder="Mobile..." style={{}}  onChange={updateMobile} />
+              </Col>
+              <Col md={6} style={{marginTop: "2px", marginBottom: "2px"}}>
+               <input placeholder="Confirm Mobile..." style={{}} onChange={updateSecMobile} />
+              </Col>
+            </Row>           
+          </div>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={sendLocation}>Send</Button>
