@@ -7,6 +7,7 @@
 	width: 97.5vw;
 	margin-left: 14px ;
 	margin-top: -180px;
+	text-align: center;
 }
 .hospital-details{
 	display: flex;
@@ -14,6 +15,8 @@
 .card-body {
     color: white;
     text-align: center;
+	align-items: center;
+	justify-content: center;
 }
 .dropdown-span {
     cursor: pointer;
@@ -31,6 +34,7 @@
 	border-radius: 5px;
 	font-size: 5px;
 	width: 230px;
+	text-align: center;
 }
 .cardCross{
 	cursor: pointer;
@@ -77,6 +81,7 @@
 		color: #C504B6;
 		border-radius: 5px;
 		width: 200px;
+		text-align: center;
 	}
 	.hospital-title{
 		font-size: 25px;
@@ -94,6 +99,7 @@
 		color: #C504B6;
 		border-radius: 5px;
 		width: 200px;
+		text-align: center;
 	}
 	.hospital-title{
 		font-size: 20px;
@@ -112,6 +118,7 @@
 		color: #C504B6;
 		border-radius: 5px;
 		width: 180px;
+		text-align: center;
 	}
 	.hospital-title{
 		font-size: 20px;
@@ -130,6 +137,7 @@
 		color: #C504B6;
 		border-radius: 5px;
 		width: 150px;
+		text-align: center;
 	}
 	.hospital-title{
 		font-size: 20px;
@@ -152,6 +160,7 @@
 		color: #C504B6;
 		border-radius: 5px;
 		width: 150px;
+		text-align: center;
 	}
 	.hospital-title{
 		font-size: 20px;
@@ -174,6 +183,7 @@
 		color: #C504B6;
 		border-radius: 5px;
 		width: 100px;
+		text-align: center;
 	}
 	.hospital-title{
 		font-size: 15px;
@@ -199,4 +209,39 @@
 	.button{
 		margin-left: -22px;
 	}
+  }
+
+  .formp{
+	position: relative;
+	z-index: 1;
+	background: #ffffff;
+	width: 380px;
+	margin: 18px 0;
+	padding: 40px 30px;
+	text-align: center;
+	border-radius: 20px;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+  }
+
+  .formp button{
+	margin: 3px auto;
+	font-family: "Roboto", sans-serif;
+	text-transform: uppercase;
+	outline: 0;
+	background-color: #328f8a;
+	background-image: linear-gradient(45deg, #b95ce4, #4f29cd);
+	width: 80%;
+	border: 0;
+	padding: 10px;
+	color: #ffffff;
+	font-size: 1rem;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
+	border-radius: 50px;
+	margin-bottom: -10px;
+  }
+
+  .loginp-page {
+	margin: -300px auto 0 auto;
   }
